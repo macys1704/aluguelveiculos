@@ -1,0 +1,244 @@
+.page2 {
+  display: flex;
+  flex-direction: row;
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: black;
+    height: auto;
+    width: 10vw;
+
+    .logo {
+      margin-top: 40px;
+    }
+
+    .hover {
+
+      background-color: #7A14C0;
+      height: 5vh;
+      width: 10vw;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin: 20px;
+
+
+
+
+      h1 {
+        color: white;
+        font-size: 18px;
+
+      }
+
+      h1+h1 {
+        color: #FF7101;
+        font-size: 18px;
+      }
+
+      .icons {
+        margin-right: 10px;
+        align-self: center;
+        justify-content: flex-start;
+      }
+
+      a {
+        color: white;
+        font-weight: 600;
+        text-align: left;
+      }
+
+      
+
+    }
+  }
+
+  .cont {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+    width: 90vw;
+    background-color: rgb(241, 241, 241);
+    overflow: hidden;
+
+
+
+
+    header {
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 90vw;
+      height: 5vh;
+      box-shadow: 0px 2px 3px 3px rgba(51, 51, 51, 0.178);
+
+
+      h2 {
+        color: rgb(189, 189, 189);
+        margin: 20px;
+        font-size: 16px;
+      }
+
+      h1 {
+        color: whitesmoke;
+        background-color: #FF7101;
+        border-radius: 100%;
+        padding: 3px 10px;
+        font-size: 16px;
+        margin: 20px;
+      }
+    }
+
+    h1 {
+      margin: 50px;
+
+    }
+
+    nav {
+      align-self: center;
+      background-color: white;
+      width: 80vw;
+      margin: 50px;
+
+
+      div {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        margin: 20px;
+        margin-left: 50px;
+        border: 1px solid rgba(0, 0, 0, 0.562);
+        padding: 8px;
+        border-radius: 7px;
+
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          color: rgb(189, 189, 189);
+
+        }
+
+        input {
+          border: none;
+          outline: none;
+
+        }
+
+
+      }
+
+      nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid black;
+        width: 400px;
+        border-radius: 8px;
+        height: 60px;
+
+
+        .listarclientes {
+          border: none !important;
+          height: 15px !important;
+
+
+        }
+
+        .lupa {
+          background-color: transparent;
+        }
+
+        img {
+          height: 30px;
+          width: 30px;
+          margin-right: 10px;
+        }
+
+
+      }
+
+
+      button {
+        background-color: #7A14C0;
+        margin: 20px;
+        margin-left: 50px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        border: none;
+        color: white;
+        font-weight: 800;
+
+      }
+
+      table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80vw;
+        height: 50vh;
+
+
+        thead {
+          
+          th {
+            
+            font-size: 16px;
+            font-weight: 600;
+            color: rgb(189, 189, 189);
+            
+
+
+          }
+          
+        }
+
+        tr {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          width: 60vw;
+
+          
+        }
+        tbody{
+          tr{
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px;
+            border: 1px solid rgba(143, 143, 143, 0.425);
+
+            td{
+              width: 250px;
+            }
+
+            .lupa {
+              background-color: transparent;
+            }
+          }
+          
+        }
+
+
+
+      }
+    }
+
+
+
+  }
+}
