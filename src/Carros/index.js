@@ -6,6 +6,7 @@ import axios from 'axios';
 export default function Carro() {
 
   const [tipoSelecionado, setTipoSelecionado] = useState(0);
+  const [listarVeiculos,setListarVeiculos] = useState([])
   const [modelo,setModelo] = useState('');
   const [ano,setAno] = useState('');
   const [tipo,setTipo] = useState([]);
@@ -32,7 +33,10 @@ export default function Carro() {
     }
     
   }
-
+  async function listar() {
+    let r = await axios.get('http://localhost:5000/veiculo');
+    setListarVeiculos(r.data);
+  }
   
   async function listarTipos() {
     let r = await axios.get('http://localhost:5000/veiculo/tipo');
@@ -93,7 +97,7 @@ export default function Carro() {
             <select  id='veiculo' name='veiculo' value={tipoSelecionado} onChange={e => setTipoSelecionado(e.target.value)}>
             <option value={0}> Selecione </option>
               {tipo.map (item =>
-                <option value={item.id_tipo}> {item.nm_tipo} </option>
+                <option value={item.id}> {item.tipo} </option>
                 )}  
             </select>
           </div>
@@ -118,23 +122,22 @@ export default function Carro() {
             <input value={placa} onChange={e => setPlaca(e.target.value)}></input>
           </div>
 
-          <button onClick={salvar} >Salvar</button>
+          <button onClick={salvar}>Salvar</button>
 
         </nav>
 
         <nav>
           <h1>Lista de Veículos</h1>
 
-          <nav>
-            <div className='listarclientes'>
-              <label>Modelo, Marca, Placa
-                Prius</label>
-              <input></input>
+          <nav  className='listar'>
+                
+              <input placeholder='Placa,Modelo e Ano' ></input>
 
-            </div>
-            <button className='lupa'>
+    
+            <button onClick={listar}>
               <img src='/assets/images/lupa.jpg'></img>
             </button>
+          
           </nav>
 
           <table>
@@ -150,46 +153,17 @@ export default function Carro() {
               </tr>
             </thead>
             <tbody>
-
-              <tr>
-                <td>HB20</td>
-                <td>Hyundai</td>
-                <td>2016</td>
-                <td>Carro</td>
-                <td>ABC-123</td>
-                <img src='/assets/images/lixo.svg'></img>
-                <img src='/assets/images/edit.svg'></img>
-              </tr>
-
-              <tr>
-                <td>Prius</td>
-                <td>Toyota</td>
-                <td>2020</td>
-                <td>Carro</td>
-                <td>ABC-124</td>
-                <img src='/assets/images/lixo.svg'></img>
-                <img src='/assets/images/edit.svg'></img>
-              </tr>
-
-              <tr>
-                <td>Corsa Hatch</td>
-                <td>Chevrolet</td>
-                <td>2008</td>
-                <td>Carro</td>
-                <td>ABC-125</td>
-                <img src='/assets/images/lixo.svg'></img>
-                <img src='/assets/images/edit.svg'></img>
-              </tr>
-
-              <tr>
-                <td>CG 160 Titan</td>
-                <td>Honda</td>
-                <td>2017</td>
-                <td>Moto</td>
-                <td>ABC-126</td>
-                <img src='/assets/images/lixo.svg'></img>
-                <img src='/assets/images/edit.svg'></img>
-              </tr>
+            {listarVeiculos.map(item =>
+                <tr>
+                  <td>{item.ds_modelo}</td>
+                  <td>{item.ds_marca}</td>
+                  <td>{item.nr_ano}</td>
+                  <td> {item.id_tipo}</td>
+                  <td>{item.ds_placa}</td>
+                 <button  className='lupa'> <img src='/assets/images/lixo.svg'></img> </button>
+                  <img src='/assets/images/edit.svg'></img>
+                </tr>
+              )}
 
             </tbody>
           </table>
