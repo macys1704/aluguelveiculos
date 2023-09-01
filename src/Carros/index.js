@@ -49,7 +49,7 @@ export default function Carro() {
       <aside>
         <img className='logo' src='/assets/images/logo.png'></img>
         <div>
-          <h1>Elite</h1>
+          <h1>Elitee</h1>
           <h1>Wheelz</h1>
         </div>
 
