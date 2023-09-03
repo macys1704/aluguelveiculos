@@ -29,6 +29,8 @@ function Clientes() {
       cnh: cnh
     }
 
+    recarregarAPagina()
+
     let url = 'http://localhost:5000/inserir'
     let resposta = await axios.post(url, cliente)
 
@@ -39,12 +41,22 @@ function Clientes() {
     let url = `http://localhost:5000/delete?id=${id}`;
 
     try {
-        let resp = await axios.get(url);
-        console.log('Recurso apagado:', resp.data);
+      let resposta = await axios.delete(url);
+      console.log('Recurso apagado:');
     } catch (error) {
-        console.error('Erro ao apagar recurso:', error);
-    }
-}
+      console.error('Erro ao apagar recurso:', error);
+      listarTodos()
+    } 
+  }
+  
+
+  async function recarregarAPagina() {
+    setNome('')
+    setCpf('')
+    setTelefone('')
+    setEmail('')
+    setCnh('')
+  }
 
   return (
     <div className="page2">
@@ -127,13 +139,13 @@ function Clientes() {
               <label>Nome</label>
               <input></input>
             </div>
-            
+
             <button className='lupa' onClick={listarTodos} > <img src='/assets/images/lupa.jpg'></img> </button>
           </nav>
 
           <table>
             <thead>
-              
+
               <tr>
                 <th>Nome</th>
                 <th>CPF</th>
@@ -144,16 +156,25 @@ function Clientes() {
             </thead>
             <tbody>
 
-              {listaClientes.map(item =>
-                <tr>
+              {listaClientes.map(item => (
+                <tr key={item.id_cliente}>
                   <td>{item.nm_cliente}</td>
                   <td>{item.nr_cpf}</td>
                   <td>{item.nr_telefone}</td>
                   <td>{item.nm_email}</td>
-                 <button  className='lupa' onClick={apagar} > <img src='/assets/images/lixo.svg'></img> </button>
-                  <img src='/assets/images/edit.svg'></img>
+                  <td>
+                    <button className='lupa' onClick={() => apagar(item.id_cliente)}>
+                      <img src='/assets/images/lixo.svg' onClick={recarregarAPagina} alt='Excluir' />
+                    </button>
+
+                  </td>
+                  <td>
+                    <img src='/assets/images/edit.svg' alt='Editar' />
+                  </td>
                 </tr>
-              )}
+              ))}
+
+
 
             </tbody>
           </table>
