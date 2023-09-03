@@ -5,6 +5,8 @@ import axios from 'axios';
 
 function Clientes() {
 
+
+  const [tipos,setTipos] = useState([])
   const [listaClientes, setlistaClientes] = useState([]);
   const [nome, setNome] = useState('')
   const [cpf, setCpf] = useState('')
@@ -12,6 +14,12 @@ function Clientes() {
   const [email, setEmail] = useState('')
   const [cnh, setCnh] = useState('')
 
+
+  async function tipoSelecionado(){
+    let x = await axios.get('http://localhost:5000/veiculo/tipo');
+   
+    setTipos(x.data)
+  }
 
   async function listarTodos() {
     let url = 'http://localhost:5000/listar';

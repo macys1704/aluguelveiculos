@@ -1,7 +1,49 @@
+import { useEffect, useState } from 'react';
 import './index.scss';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Carro() {
+
+  const [tipoSelecionado, setTipoSelecionado] = useState(0);
+  const [modelo,setModelo] = useState('');
+  const [ano,setAno] = useState('');
+  const [tipo,setTipo] = useState([]);
+  const [marca,setMarca] = useState('');
+  const [placa,setPlaca] = useState('');
+  const [erro,setErro] = useState('')
+
+  async function salvar(){
+    try {
+      let veiculo = {
+        idTipoVeiculo:tipoSelecionado,
+        modelo:modelo,
+        marca:marca,
+        ano:ano,
+        placa:placa
+      }
+
+      let x = await axios.post('http://localhost:5000/veiculo', veiculo);
+  
+      alert('Veículo cadastrado!');
+      
+    } catch (err) {
+      setErro(err.response.data.erro);
+    }
+    
+  }
+
+  
+  async function listarTipos() {
+    let r = await axios.get('http://localhost:5000/veiculo/tipo');
+    setTipo(r.data);
+  }
+
+  useEffect (() => {
+    listarTipos()
+  },[])
+
+ 
   return (
     <div className="page1">
       <aside>
@@ -48,31 +90,35 @@ export default function Carro() {
           <h1>Novo Veículo</h1>
 
           <div>
-            <label>Tipo</label>
-            <input></input>
+            <select  id='veiculo' name='veiculo' value={tipoSelecionado} onChange={e => setTipoSelecionado(e.target.value)}>
+            <option value={0}> Selecione </option>
+              {tipo.map (item =>
+                <option value={item.id_tipo}> {item.nm_tipo} </option>
+                )}  
+            </select>
           </div>
 
           <div>
             <label>Modelo</label>
-            <input></input>
+            <input value={modelo} onChange={e => setModelo(e.target.value)}></input>
           </div>
 
           <div>
-            <label>Placa</label>
-            <input></input>
+            <label>Marca</label>
+            <input value={marca} onChange={e => setMarca(e.target.value)}></input>
           </div>
 
           <div>
             <label>Ano</label>
-            <input></input>
+            <input value={ano} onChange={e => setAno(e.target.value)}></input>
           </div>
 
           <div>
             <label>Placa</label>
-            <input></input>
+            <input value={placa} onChange={e => setPlaca(e.target.value)}></input>
           </div>
 
-          <button>Salvar</button>
+          <button onClick={salvar} >Salvar</button>
 
         </nav>
 
